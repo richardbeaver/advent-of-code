@@ -80,13 +80,17 @@ fn any_adjacent_symbol(input_lines: &[&str], line_num: usize, idx: usize, end_id
 
     for &line in &input_lines[last_line..=next_line] {
         for char in line[min_idx..end_idx].chars() {
-            if char != '.' && !char.is_numeric() {
+            if is_symbol(char) {
                 return true;
             }
         }
     }
 
     false
+}
+
+pub fn is_symbol(char: char) -> bool {
+    char != '.' && !char.is_numeric()
 }
 
 #[cfg(test)]
