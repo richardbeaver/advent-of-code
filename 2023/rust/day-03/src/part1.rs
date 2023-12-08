@@ -2,6 +2,8 @@ use crate::shared::{is_symbol, SubstringLocation};
 use anyhow::Result;
 use std::cmp;
 
+// TODO: replace unwraps with anyhow error handling
+
 // Get sum of all numbers adjacent to any symbol (even diagonally)
 pub fn process(input: &str) -> Result<usize> {
     let mut sum = 0;
