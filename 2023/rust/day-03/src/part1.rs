@@ -10,7 +10,7 @@ pub fn process(input: &str) -> usize {
     dbg!(&number_locations);
 
     for num_loc in number_locations {
-        if any_adjacent_symbol(&lines, num_loc.line, num_loc.idx, num_loc.end_idx) {
+        if any_adjacent_symbol(&lines, num_loc.line_num, num_loc.idx, num_loc.end_idx) {
             sum += num_loc.str.parse::<usize>().unwrap();
         }
     }
@@ -21,22 +21,27 @@ pub fn process(input: &str) -> usize {
 #[derive(Debug)]
 pub struct SubstringLocation {
     pub str: String,
-    pub line: usize,
+    pub line_num: usize,
     pub idx: usize,
     pub end_idx: usize,
 }
 
 impl SubstringLocation {
-    pub fn new(input_lines: &[&str], line: usize, idx: usize, end_idx: usize) -> Result<Self, ()> {
+    pub fn new(
+        input_lines: &[&str],
+        line_num: usize,
+        idx: usize,
+        end_idx: usize,
+    ) -> Result<Self, ()> {
         if end_idx <= idx {
             return Err(());
         }
 
-        let input_line = *input_lines.get(line).ok_or(())?;
+        let input_line = *input_lines.get(line_num).ok_or(())?;
 
         Ok(Self {
             str: input_line[idx..end_idx].to_owned(),
-            line,
+            line_num,
             idx,
             end_idx,
         })
@@ -72,13 +77,13 @@ fn get_all_number_locations(input_lines: &[&str]) -> Vec<SubstringLocation> {
 // Determine if there is a symbol adjacent to the number string described by
 // its line number, its index in its line, and its length
 fn any_adjacent_symbol(input_lines: &[&str], line_num: usize, idx: usize, end_idx: usize) -> bool {
-    let last_line = cmp::max(line_num as isize - 1, 0) as usize;
+    let prev_line = cmp::max(line_num as isize - 1, 0) as usize;
     let next_line = cmp::min(line_num + 1, input_lines.len() - 1);
 
     let min_idx = cmp::max(idx as isize - 1, 0) as usize;
     let end_idx = cmp::min(end_idx + 1, input_lines.first().unwrap().len());
 
-    for &line in &input_lines[last_line..=next_line] {
+    for &line in &input_lines[prev_line..=next_line] {
         for char in line[min_idx..end_idx].chars() {
             if is_symbol(char) {
                 return true;
