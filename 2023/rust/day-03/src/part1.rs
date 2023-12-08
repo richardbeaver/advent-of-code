@@ -20,14 +20,14 @@ pub fn process(input: &str) -> usize {
 
 #[derive(Debug)]
 pub struct SubstringLocation {
-    str: String,
-    line: usize,
-    idx: usize,
-    end_idx: usize,
+    pub str: String,
+    pub line: usize,
+    pub idx: usize,
+    pub end_idx: usize,
 }
 
 impl SubstringLocation {
-    fn new(input_lines: &[&str], line: usize, idx: usize, end_idx: usize) -> Result<Self, ()> {
+    pub fn new(input_lines: &[&str], line: usize, idx: usize, end_idx: usize) -> Result<Self, ()> {
         if end_idx <= idx {
             return Err(());
         }
