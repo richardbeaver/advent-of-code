@@ -11,7 +11,7 @@ pub fn process(input: &str) -> usize {
 
     for num_loc in number_locations {
         if any_adjacent_symbol(&lines, num_loc.line, num_loc.idx, num_loc.end_idx) {
-            sum += num_loc.number_str.parse::<usize>().unwrap();
+            sum += num_loc.str.parse::<usize>().unwrap();
         }
     }
 
@@ -19,14 +19,14 @@ pub fn process(input: &str) -> usize {
 }
 
 #[derive(Debug)]
-pub struct NumberStringLocation {
-    number_str: String,
+pub struct SubstringLocation {
+    str: String,
     line: usize,
     idx: usize,
     end_idx: usize,
 }
 
-impl NumberStringLocation {
+impl SubstringLocation {
     fn new(input_lines: &[&str], line: usize, idx: usize, end_idx: usize) -> Result<Self, ()> {
         if end_idx <= idx {
             return Err(());
@@ -35,7 +35,7 @@ impl NumberStringLocation {
         let input_line = *input_lines.get(line).ok_or(())?;
 
         Ok(Self {
-            number_str: input_line[idx..end_idx].to_owned(),
+            str: input_line[idx..end_idx].to_owned(),
             line,
             idx,
             end_idx,
@@ -43,7 +43,7 @@ impl NumberStringLocation {
     }
 }
 
-pub fn get_all_number_locations(input_lines: &[&str]) -> Vec<NumberStringLocation> {
+fn get_all_number_locations(input_lines: &[&str]) -> Vec<SubstringLocation> {
     let mut number_locations = Vec::new();
 
     for (line_num, line) in input_lines.iter().enumerate() {
@@ -58,8 +58,7 @@ pub fn get_all_number_locations(input_lines: &[&str]) -> Vec<NumberStringLocatio
 
             if !next_num.is_empty() {
                 let number =
-                    NumberStringLocation::new(input_lines, line_num, i, i + next_num.len())
-                        .unwrap();
+                    SubstringLocation::new(input_lines, line_num, i, i + next_num.len()).unwrap();
                 number_locations.push(number);
             }
 
