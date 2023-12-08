@@ -1,4 +1,5 @@
-use anyhow::{anyhow, Context, Result};
+use crate::shared::{is_symbol, SubstringLocation};
+use anyhow::Result;
 use std::cmp;
 
 // Get sum of all numbers adjacent to any symbol (even diagonally)
@@ -17,33 +18,6 @@ pub fn process(input: &str) -> Result<usize> {
     }
 
     Ok(sum)
-}
-
-#[derive(Debug)]
-pub struct SubstringLocation {
-    pub str: String,
-    pub line_num: usize,
-    pub idx: usize,
-    pub end_idx: usize,
-}
-
-impl SubstringLocation {
-    pub fn new(input_lines: &[&str], line_num: usize, idx: usize, end_idx: usize) -> Result<Self> {
-        if end_idx <= idx {
-            return Err(anyhow!("End index must be greater than start index."));
-        }
-
-        let input_line = *input_lines
-            .get(line_num)
-            .context("Line number not a valid index into lines.")?;
-
-        Ok(Self {
-            str: input_line[idx..end_idx].to_owned(),
-            line_num,
-            idx,
-            end_idx,
-        })
-    }
 }
 
 fn get_all_number_locations(input_lines: &[&str]) -> Vec<SubstringLocation> {
@@ -90,10 +64,6 @@ fn any_adjacent_symbol(input_lines: &[&str], line_num: usize, idx: usize, end_id
     }
 
     false
-}
-
-pub fn is_symbol(char: char) -> bool {
-    char != '.' && !char.is_numeric()
 }
 
 #[cfg(test)]

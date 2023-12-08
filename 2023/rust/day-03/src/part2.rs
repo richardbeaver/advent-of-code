@@ -1,4 +1,4 @@
-use crate::part1::{is_symbol, SubstringLocation};
+use crate::shared::{is_symbol, SubstringLocation};
 use anyhow::{Context, Result};
 use std::cmp;
 
