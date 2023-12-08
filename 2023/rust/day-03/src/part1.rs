@@ -1,7 +1,8 @@
+use anyhow::{anyhow, Context, Result};
 use std::cmp;
 
 // Get sum of all numbers adjacent to any symbol (even diagonally)
-pub fn process(input: &str) -> usize {
+pub fn process(input: &str) -> Result<usize> {
     let mut sum = 0;
     let lines: Vec<_> = input.lines().collect();
 
@@ -11,11 +12,11 @@ pub fn process(input: &str) -> usize {
 
     for num_loc in number_locations {
         if any_adjacent_symbol(&lines, num_loc.line_num, num_loc.idx, num_loc.end_idx) {
-            sum += num_loc.str.parse::<usize>().unwrap();
+            sum += num_loc.str.parse::<usize>()?;
         }
     }
 
-    sum
+    Ok(sum)
 }
 
 #[derive(Debug)]
@@ -27,17 +28,14 @@ pub struct SubstringLocation {
 }
 
 impl SubstringLocation {
-    pub fn new(
-        input_lines: &[&str],
-        line_num: usize,
-        idx: usize,
-        end_idx: usize,
-    ) -> Result<Self, ()> {
+    pub fn new(input_lines: &[&str], line_num: usize, idx: usize, end_idx: usize) -> Result<Self> {
         if end_idx <= idx {
-            return Err(());
+            return Err(anyhow!("End index must be greater than start index."));
         }
 
-        let input_line = *input_lines.get(line_num).ok_or(())?;
+        let input_line = *input_lines
+            .get(line_num)
+            .context("Line number not a valid index into lines.")?;
 
         Ok(Self {
             str: input_line[idx..end_idx].to_owned(),
@@ -116,7 +114,7 @@ mod tests {
 .664.598..";
         let expected_output = 4361;
 
-        let result = process(example_input);
+        let result = process(example_input).unwrap();
 
         assert_eq!(result, expected_output);
     }
