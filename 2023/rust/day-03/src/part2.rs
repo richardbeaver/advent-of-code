@@ -102,10 +102,12 @@ fn get_adjacent_numbers(
 /// Starting from a known digit in a line, find all digits that make up the
 /// complete number. Return the numeric value.
 fn get_num_from_digit(line: &str, idx: usize) -> Result<usize> {
+    let bytes = line.as_bytes();
+
     // Go left until reaching the end of the number's characters
     let mut start_idx = idx;
     loop {
-        if !(line.as_bytes()[start_idx] as char).is_numeric() {
+        if !(bytes[start_idx] as char).is_numeric() {
             start_idx += 1;
             break;
         }
@@ -121,7 +123,7 @@ fn get_num_from_digit(line: &str, idx: usize) -> Result<usize> {
         if end_idx == line.len() {
             break;
         }
-        if !(line.as_bytes()[end_idx] as char).is_numeric() {
+        if !(bytes[end_idx] as char).is_numeric() {
             break;
         }
         end_idx += 1;
