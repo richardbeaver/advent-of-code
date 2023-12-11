@@ -1,4 +1,6 @@
-pub fn process(_input: &str) -> String {
+use anyhow::Result;
+
+pub fn process(_input: &str) -> Result<String> {
     todo!("part 1")
 }
 
@@ -13,7 +15,7 @@ mod tests {
         let example_input = "";
         let expected_output = "";
 
-        let result = process(example_input);
+        let result = process(example_input).unwrap();
         assert_eq!(result, expected_output);
     }
 }

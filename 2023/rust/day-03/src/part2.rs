@@ -152,7 +152,6 @@ mod tests {
         let expected_output = 467835;
 
         let result = process(example_input).unwrap();
-
         assert_eq!(result, expected_output);
     }
 }
