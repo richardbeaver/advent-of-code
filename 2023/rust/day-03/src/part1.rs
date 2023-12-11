@@ -4,7 +4,7 @@ use std::cmp;
 
 // TODO: replace unwraps with anyhow error handling
 
-// Get sum of all numbers adjacent to any symbol (even diagonally)
+/// Get sum of all numbers adjacent to any symbol (even diagonally)
 pub fn process(input: &str) -> Result<usize> {
     let mut sum = 0;
     let lines: Vec<_> = input.lines().collect();
@@ -22,6 +22,7 @@ pub fn process(input: &str) -> Result<usize> {
     Ok(sum)
 }
 
+/// Collect substring location structs for all numbers
 fn get_all_number_locations(input_lines: &[&str]) -> Vec<SubstringLocation> {
     let mut number_locations = Vec::new();
 
@@ -48,8 +49,8 @@ fn get_all_number_locations(input_lines: &[&str]) -> Vec<SubstringLocation> {
     number_locations
 }
 
-// Determine if there is a symbol adjacent to the number string described by
-// its line number, its index in its line, and its length
+/// Determine if there is a symbol adjacent to the number string described by
+/// its line number, its index in its line, and its length
 fn any_adjacent_symbol(input_lines: &[&str], line_num: usize, idx: usize, end_idx: usize) -> bool {
     let prev_line = cmp::max(line_num as isize - 1, 0) as usize;
     let next_line = cmp::min(line_num + 1, input_lines.len() - 1);

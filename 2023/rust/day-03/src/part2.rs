@@ -2,8 +2,8 @@ use crate::shared::{is_symbol, SubstringLocation};
 use anyhow::{Context, Result};
 use std::cmp;
 
-// For all symbols that are adjacent to exactly two numbers, multiply the
-// two numbers and get sum of all resulting products
+/// For all symbols that are adjacent to exactly two numbers, multiply the
+/// two numbers and get sum of all resulting products
 pub fn process(input: &str) -> Result<usize> {
     // For every symbol in the input, check the 9 coordinates around it
     // Numbers can be adjacent in 4 directions (above, left, right, below)
@@ -32,6 +32,7 @@ pub fn process(input: &str) -> Result<usize> {
     Ok(sum)
 }
 
+/// Collect substring location structs for all symbols
 fn get_all_symbol_locations(input_lines: &[&str]) -> Vec<SubstringLocation> {
     let mut symbol_locations = Vec::new();
 
@@ -55,13 +56,16 @@ fn get_all_symbol_locations(input_lines: &[&str]) -> Vec<SubstringLocation> {
 // TODO: use inclusive end indexes for line and line indexes here and
 //  in `get_num_from_digit` -> more unified in using inclusive indexing
 //  everywhere (lines and line indexes)
+
+/// Collect all numbers adjacent to the substring at the given line number
+/// and indexes.
 fn get_adjacent_numbers(
     input_lines: &[&str],
     line_num: usize,
     idx: usize,
     end_idx: usize,
 ) -> Result<Vec<usize>> {
-    let last_line = cmp::max(line_num as isize - 1, 0) as usize;
+    let prev_line = cmp::max(line_num as isize - 1, 0) as usize;
     let next_line = cmp::min(line_num + 1, input_lines.len() - 1);
 
     let min_idx = cmp::max(idx as isize - 1, 0) as usize;
@@ -69,7 +73,7 @@ fn get_adjacent_numbers(
 
     let mut numbers = Vec::new();
 
-    for &line in &input_lines[last_line..=next_line] {
+    for &line in &input_lines[prev_line..=next_line] {
         let chars = line.chars().collect::<Vec<_>>();
 
         let mut i = min_idx;
@@ -95,7 +99,10 @@ fn get_adjacent_numbers(
     Ok(numbers)
 }
 
+/// Starting from a known digit in a line, find all digits that make up the
+/// complete number. Return the numeric value.
 fn get_num_from_digit(line: &str, idx: usize) -> Result<usize> {
+    // Go left until reaching the end of the number's characters
     let mut start_idx = idx;
     loop {
         if !(line.as_bytes()[start_idx] as char).is_numeric() {
@@ -108,6 +115,7 @@ fn get_num_from_digit(line: &str, idx: usize) -> Result<usize> {
         start_idx -= 1;
     }
 
+    // Go right until reaching the end of the number's characters
     let mut end_idx = idx;
     loop {
         if end_idx == line.len() {
