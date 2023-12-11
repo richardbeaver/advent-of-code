@@ -3,3 +3,6 @@ run day part:
 
 test day part:
   cargo test -p {{day}} {{part}}
+
+create day:
+  cargo generate --path ./template --name {{day}}
