@@ -1,7 +1,7 @@
-use template::part1::process;
+use {{crate_name}}::part1::process;
 
 fn main() {
-    let input = include_str!("../../input2.txt");
+    let input = include_str!("../../input1.txt");
     let output = process(input);
     dbg!(output);
 }
