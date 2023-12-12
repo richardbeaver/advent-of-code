@@ -1,4 +1,3 @@
-use crate::shared::{is_symbol, SubstringLocation};
 use anyhow::Result;
 use std::cmp;
 
@@ -9,44 +8,32 @@ pub fn process(input: &str) -> Result<usize> {
     let mut sum = 0;
     let lines: Vec<_> = input.lines().collect();
 
-    let number_locations = get_all_number_locations(&lines);
+    for (line_num, line) in input.lines().enumerate() {
+        let mut current_num = String::new();
 
-    dbg!(&number_locations);
+        for (mut idx, char) in line.chars().enumerate() {
+            if char.is_numeric() {
+                current_num.push(char);
+            }
 
-    for num_loc in number_locations {
-        if any_adjacent_symbol(&lines, num_loc.line_num, num_loc.idx, num_loc.end_idx) {
-            sum += num_loc.str.parse::<usize>()?;
+            if (!char.is_numeric() || idx == line.len() - 1) && !current_num.is_empty() {
+                // `idx` is either past the end of a number or on the last digit
+                // of a number at the end of a line
+                // If at the last char of the line and it is numeric, increment
+                // `idx` so we're past the number (the same scenario as reaching
+                // a non-numeric char before the end of the line)
+                if idx == line.len() - 1 && char.is_numeric() {
+                    idx += 1
+                }
+                if any_adjacent_symbol(&lines, line_num, idx - current_num.len(), idx) {
+                    sum += current_num.parse::<usize>()?;
+                }
+                current_num.clear();
+            }
         }
     }
 
     Ok(sum)
-}
-
-/// Collect substring location structs for all numbers
-fn get_all_number_locations(input_lines: &[&str]) -> Vec<SubstringLocation> {
-    let mut number_locations = Vec::new();
-
-    for (line_num, line) in input_lines.iter().enumerate() {
-        let mut i = 0;
-        while i < line.len() {
-            let next_num: String = line
-                .get(i..)
-                .unwrap()
-                .chars()
-                .take_while(|c| c.is_numeric())
-                .collect();
-
-            if !next_num.is_empty() {
-                let number =
-                    SubstringLocation::new(input_lines, line_num, i, i + next_num.len()).unwrap();
-                number_locations.push(number);
-            }
-
-            i += cmp::max(next_num.len(), 1);
-        }
-    }
-
-    number_locations
 }
 
 /// Determine if there is a symbol adjacent to the number string described by
@@ -67,6 +54,10 @@ fn any_adjacent_symbol(input_lines: &[&str], line_num: usize, idx: usize, end_id
     }
 
     false
+}
+
+pub fn is_symbol(char: char) -> bool {
+    char != '.' && !char.is_numeric()
 }
 
 #[cfg(test)]
