@@ -6,4 +6,5 @@ fn main() -> Result<()> {
     let output = process(input)?;
     dbg!(output);
     Ok(())
+    // => 6050769
 }
