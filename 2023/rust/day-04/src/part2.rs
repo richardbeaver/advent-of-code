@@ -19,7 +19,7 @@ pub fn process(input: &str) -> Result<usize> {
     Ok(card_counts.values().sum())
 }
 
-fn get_number_of_matches(line: &str) -> usize {
+pub fn get_number_of_matches(line: &str) -> usize {
     let line = line.chars().skip(8).collect::<String>();
     let (winning_numbers, my_numbers) = line.split_once(|num| num == '|').unwrap();
 

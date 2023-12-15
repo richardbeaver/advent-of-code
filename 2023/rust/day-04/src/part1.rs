@@ -1,35 +1,20 @@
-use anyhow::{Context, Result};
+use crate::part2::get_number_of_matches;
+use anyhow::Result;
 
 pub fn process(input: &str) -> Result<usize> {
     let mut sum = 0;
 
     for line in input.lines() {
-        let chars: String = line
-            .chars()
-            .skip_while(|&char| char != ':')
-            .skip(2)
-            .collect();
-        let (winning_numbers, my_numbers) = chars
-            .split_once('|')
-            .context("Line does not match expected file format.")?;
+        let num_matches = get_number_of_matches(line);
 
-        let winning_numbers: Vec<_> = winning_numbers.split_whitespace().collect();
-        let my_numbers: Vec<_> = my_numbers.split_whitespace().collect();
-
-        let mut score = 0;
-        for number in my_numbers {
-            if winning_numbers.contains(&number) {
-                if score == 0 {
-                    score += 1;
-                } else {
-                    score *= 2;
-                }
-            }
-        }
+        let score = if num_matches == 0 {
+            0
+        } else {
+            2usize.pow((num_matches - 1) as u32)
+        };
 
         sum += score;
     }
-
     Ok(sum)
 }
 
