@@ -10,10 +10,9 @@ pub fn process(input: &str) -> Result<usize> {
 
         let num_matches = get_number_of_matches(line);
 
-        for _ in 0..num_copies {
-            for card_number in (cur_card_number + 1)..=(cur_card_number + num_matches) {
-                *card_counts.entry(card_number).or_insert(1) += 1;
-            }
+        for card_number in (cur_card_number + 1)..=(cur_card_number + num_matches) {
+            let their_count = card_counts.get(&card_number).unwrap_or(&1);
+            card_counts.insert(card_number, their_count + num_copies);
         }
     }
 
