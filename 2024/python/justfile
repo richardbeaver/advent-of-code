@@ -1,0 +1,5 @@
+test DAY:
+    pytest --capture=no d{{DAY}}/main.py
+
+run DAY:
+    python3 d{{DAY}}/main.py
