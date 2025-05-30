@@ -1,0 +1,12 @@
+[workspace]
+authors = ["Richard Beaver <rickybeaver3@gmail.com>"]
+channels = ["https://conda.modular.com/max-nightly", "conda-forge"]
+name = "mojo"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+modular = ">=25.4.0.dev2025053005,<26"
+just = ">=1.40.0,<2"
