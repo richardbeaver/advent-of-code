@@ -1,5 +1,7 @@
+[no-exit-message]
 test DAY:
-    pytest --capture=no d{{DAY}}/main.py
+    pytest --capture=no {{DAY}}/test.py
 
+[no-exit-message]
 run DAY:
-    python3 d{{DAY}}/main.py
+    python3 {{DAY}}/main.py
