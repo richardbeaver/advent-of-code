@@ -4,4 +4,4 @@ test DAY:
 
 [no-exit-message]
 run DAY:
-    python3 {{DAY}}/main.py
+    python3 main.py {{DAY}}
