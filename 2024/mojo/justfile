@@ -1,7 +1,7 @@
 [no-exit-message]
 test DAY:
-    mojo test d{{DAY}}/test_.mojo
+    mojo test {{DAY}}/test_.mojo
 
 [no-exit-message]
 run DAY:
-    mojo d{{DAY}}/main.mojo
+    mojo {{DAY}}/main.mojo

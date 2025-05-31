@@ -4,7 +4,7 @@ from part2 import part2
 
 def main():
     var text: String
-    with open("inputs/d01.txt", "r'") as file:
+    with open("../inputs/01.txt", "r'") as file:
         text = file.read()
 
     print(part1(text))  # => 1646452
