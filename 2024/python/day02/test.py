@@ -1,5 +1,5 @@
 from pathlib import Path
-import sys
+from python import utils
 from . import part1
 from . import part2
 
@@ -25,15 +25,11 @@ def test_part2():
 
 # =============
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
-
-from utils import read_data_input
-
 
 def test_solutions():
     """Test part1 and part2 on full input to ensure they correctly solve puzzle"""
     day: str = Path(__file__).parent.name.removeprefix("day")
-    text = read_data_input(int(day))
+    text = utils.read_data_input(int(day))
 
     assert part1.solve(text) == 680
     assert part2.solve(text) == 710
