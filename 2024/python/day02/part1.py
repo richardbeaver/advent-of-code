@@ -1,7 +1,7 @@
 import itertools
 
 
-def part1(problem_input: str) -> int:
+def solve(problem_input: str) -> int:
     grouped_values = parse_input(problem_input)
 
     num_safe = 0

@@ -10,8 +10,8 @@ def main(day: int):
     part2 = importlib.import_module(f"day{day:02}.part2")
 
     print(f"=== Day {day:02} ===")
-    print("Part 1:", part1.part1(input_text))
-    print("Part 2:", part2.part2(input_text))
+    print("Part 1:", part1.solve(input_text))
+    print("Part 2:", part2.solve(input_text))
 
 
 if __name__ == "__main__":

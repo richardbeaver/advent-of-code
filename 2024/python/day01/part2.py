@@ -2,7 +2,7 @@ from collections import defaultdict
 from . import part1
 
 
-def part2(problem_input: str) -> int:
+def solve(problem_input: str) -> int:
     """
     Tally a `similarity score`, which is the sum of:
     - Every number in the left side list multipled by how many times it appears

@@ -1,7 +1,7 @@
 from pathlib import Path
 import sys
-from .part1 import part1
-from .part2 import part2
+from . import part1
+from . import part2
 
 
 TEST_INPUT = """3   4
@@ -14,12 +14,12 @@ TEST_INPUT = """3   4
 
 def test_part1():
     """Test part1 using example input"""
-    assert part1(TEST_INPUT) == 11
+    assert part1.solve(TEST_INPUT) == 11
 
 
 def test_part2():
     """Test part2 using example input"""
-    assert part2(TEST_INPUT) == 31
+    assert part2.solve(TEST_INPUT) == 31
 
 
 # =============
@@ -34,5 +34,5 @@ def test_solutions():
     day: str = Path(__file__).parent.name.removeprefix("day")
     text = read_data_input(int(day))
 
-    assert part1(text) == 1646452
-    assert part2(text) == 23609874
+    assert part1.solve(text) == 1646452
+    assert part2.solve(text) == 23609874

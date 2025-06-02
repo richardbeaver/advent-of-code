@@ -1,4 +1,4 @@
-def part1(problem_input: str) -> int:
+def solve(problem_input: str) -> int:
     """
     Tally a 'total distance':
     - The sum of all distances between each pair of numbers in the two lists,

@@ -1,7 +1,7 @@
 from . import part1
 
 
-def part2(problem_input: str) -> int:
+def solve(problem_input: str) -> int:
     grouped_values: list[list[int]] = part1.parse_input(problem_input)
 
     return sum(1 for group in grouped_values if group_is_safe(group))
