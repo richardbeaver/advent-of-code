@@ -1,8 +1,7 @@
-import os
 from pathlib import Path
 import sys
-from part1 import part1
-from part2 import part2
+from .part1 import part1
+from .part2 import part2
 
 
 TEST_INPUT = """3   4
@@ -25,15 +24,15 @@ def test_part2():
 
 # =============
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-from utils import read_input_file
+from utils import read_data_input
 
 
 def test_solutions():
     """Test part1 and part2 on full input to ensure they correctly solve puzzle"""
-    day = Path(__file__).parent.name
-    text = read_input_file(day)
+    day: str = Path(__file__).parent.name.removeprefix("day")
+    text = read_data_input(int(day))
 
     assert part1(text) == 1646452
     assert part2(text) == 23609874

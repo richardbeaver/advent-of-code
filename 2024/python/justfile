@@ -1,6 +1,6 @@
 [no-exit-message]
 test DAY:
-    pytest --capture=no {{DAY}}/test.py
+    pytest --capture=no day{{DAY}}/test.py
 
 [no-exit-message]
 run DAY:

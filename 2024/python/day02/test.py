@@ -1,5 +1,5 @@
-from part1 import part1
-from part2 import part2
+from .part1 import part1
+from .part2 import part2
 
 
 TEST_INPUT = """7 6 4 2 1

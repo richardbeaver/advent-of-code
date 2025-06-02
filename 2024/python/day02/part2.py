@@ -1,4 +1,4 @@
-import part1
+from . import part1
 
 
 def part2(problem_input: str) -> int:
