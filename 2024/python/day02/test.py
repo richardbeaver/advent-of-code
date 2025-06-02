@@ -1,3 +1,5 @@
+from pathlib import Path
+import sys
 from .part1 import part1
 from .part2 import part2
 
@@ -19,3 +21,19 @@ def test_part2():
 
     own_input = """4 6 4 2 1"""
     assert part2(own_input) == 1
+
+
+# =============
+
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
+from utils import read_data_input
+
+
+def test_solutions():
+    """Test part1 and part2 on full input to ensure they correctly solve puzzle"""
+    day: str = Path(__file__).parent.name.removeprefix("day")
+    text = read_data_input(int(day))
+
+    assert part1(text) == 680
+    assert part2(text) == 710
