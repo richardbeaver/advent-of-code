@@ -1,7 +1,7 @@
+import re
 from pathlib import Path
-from python import utils
-from . import part1
-from . import part2
+import utils
+from day01 import part1, part2
 
 
 TEST_INPUT = """3   4
@@ -27,8 +27,11 @@ def test_part2():
 
 def test_solutions():
     """Test part1 and part2 on full input to ensure they correctly solve puzzle"""
-    day: str = Path(__file__).parent.name.removeprefix("day")
-    text = utils.read_data_input(int(day))
+    file_name = Path(__file__).name
+    day = re.search(r"day(\d+)", file_name)
+    assert day is not None, f"Could not extract day from filename: {__file__}"
+
+    text = utils.read_data_input(int(day.group(1)))
 
     assert part1.solve(text) == 1646452
     assert part2.solve(text) == 23609874
