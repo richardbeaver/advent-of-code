@@ -1,8 +1,8 @@
 from pathlib import Path
 import test_utils
-from src import utils
-from src.day02 import part1, part2
 
+
+DAY = test_utils.get_day_from_filename(Path(__file__).name)
 
 TEST_INPUT = """7 6 4 2 1
 1 2 7 8 9
@@ -12,16 +12,15 @@ TEST_INPUT = """7 6 4 2 1
 1 3 6 7 9"""
 
 
-def test_samples():
-    test_utils.run_solver_test(part1, TEST_INPUT, 2)
+def test_sample_part1():
+    test_utils.run_part_test(DAY, part=1, input_text=TEST_INPUT, expected=2)
 
-    test_utils.run_solver_test(part2, TEST_INPUT, 4)
-    test_utils.run_solver_test(part2, "4 6 4 2 1", 1)
+
+def test_sample_part2():
+    test_utils.run_part_test(DAY, part=2, input_text=TEST_INPUT, expected=4)
+    test_utils.run_part_test(DAY, part=2, input_text="4 6 4 2 1", expected=1)
 
 
 def test_solutions():
-    day = test_utils.get_day_from_filename(Path(__file__).name)
-    text = utils.read_data_input(day)
-
-    test_utils.run_solver_test(part1, text, 680)
-    test_utils.run_solver_test(part2, text, 710)
+    test_utils.run_full_input_test(DAY, part=1, expected=680)
+    test_utils.run_full_input_test(DAY, part=2, expected=710)
