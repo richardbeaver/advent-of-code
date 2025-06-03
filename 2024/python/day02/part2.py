@@ -1,10 +1,10 @@
-from . import part1
+import parsing
 
 
 def solve(problem_input: str) -> int:
-    grouped_values: list[list[int]] = part1.parse_input(problem_input)
+    input_values = parsing.group_as_ints(problem_input)
 
-    return sum(1 for group in grouped_values if group_is_safe(group))
+    return sum(1 for group in input_values if group_is_safe(list(group)))
 
 
 # TODO: reformulate this -> checking both directions in case first value is the

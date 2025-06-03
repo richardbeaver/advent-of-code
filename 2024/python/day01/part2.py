@@ -1,5 +1,5 @@
 from collections import defaultdict
-from . import part1
+import parsing
 
 
 def solve(problem_input: str) -> int:
@@ -9,7 +9,8 @@ def solve(problem_input: str) -> int:
       in the right side list
     """
 
-    left, right = part1.parse_input(problem_input)
+    input_values = parsing.group_as_ints(problem_input)
+    left, right = (list(col) for col in zip(*input_values))
 
     # 1.
 
