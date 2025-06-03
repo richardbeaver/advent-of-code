@@ -1,5 +1,4 @@
 import argparse
-import importlib
 import sys
 import utils
 
@@ -11,7 +10,7 @@ def main(day: int):
 
     # Run part 1 (always required)
     try:
-        part1 = importlib.import_module(f"day{day:02}.part1")
+        part1 = utils.import_part_module(day, 1)
         print("Part 1:", part1.solve(input_text))
     except (ImportError, AttributeError) as e:
         print(f"[ERROR] Could not run part 1: {e}")
@@ -19,7 +18,7 @@ def main(day: int):
 
     # Run part 2 (optional)
     try:
-        part2 = importlib.import_module(f"day{day:02}.part2")
+        part2 = utils.import_part_module(day, 2)
         print("Part 2:", part2.solve(input_text))
     except ModuleNotFoundError:
         print("[INFO] Skipping part 2 — not implemented yet.")
