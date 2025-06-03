@@ -8,3 +8,9 @@ test-all:
 [no-exit-message]
 run DAY:
     python3 main.py {{DAY}}
+
+run-all:
+    for i in $(seq 1 2); do \
+    echo ""; \
+    just run $i; \
+    done
