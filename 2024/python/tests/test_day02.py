@@ -1,7 +1,7 @@
 from pathlib import Path
 import test_utils
-import utils
-from day02 import part1, part2
+from src import utils
+from src.day02 import part1, part2
 
 
 TEST_INPUT = """7 6 4 2 1

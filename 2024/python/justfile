@@ -7,7 +7,7 @@ test-all:
 
 [no-exit-message]
 run DAY:
-    python3 main.py {{DAY}}
+    python3 src/main.py {{DAY}}
 
 run-all:
     for i in $(seq 1 2); do \

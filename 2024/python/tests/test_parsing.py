@@ -1,4 +1,4 @@
-from parsing import as_lines, group_as_ints
+from src.parsing import as_lines, group_as_ints
 
 
 TEST_INPUT = """
