@@ -19,7 +19,9 @@ if __name__ == "__main__":
     parser.add_argument("day", type=int)
     args = parser.parse_args()
 
-    try:
-        main(args.day)
-    except (FileNotFoundError, ImportError) as e:
-        sys.exit(f"Error: {e}")
+    main(args.day)
+
+    # try:
+    #     main(args.day)
+    # except (FileNotFoundError, ImportError) as e:
+    #     sys.exit(f"Error: {e}")
