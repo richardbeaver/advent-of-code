@@ -2,6 +2,9 @@
 test DAY:
     pytest --capture=no tests/test_day{{DAY}}.py
 
+test-all:
+    pytest tests
+
 [no-exit-message]
 run DAY:
     python3 main.py {{DAY}}
