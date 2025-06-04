@@ -4,12 +4,14 @@ import test_utils
 
 DAY = test_utils.get_day_from_filename(Path(__file__).name)
 
-TEST_INPUT = """7 6 4 2 1
+TEST_INPUT = """
+7 6 4 2 1
 1 2 7 8 9
 9 7 6 2 1
 1 3 2 4 5
 8 6 4 4 1
-1 3 6 7 9"""
+1 3 6 7 9
+"""
 
 
 def test_sample_part1():

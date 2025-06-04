@@ -4,12 +4,14 @@ import test_utils
 
 DAY = test_utils.get_day_from_filename(Path(__file__).name)
 
-TEST_INPUT = """3   4
+TEST_INPUT = """
+3   4
 4   3
 2   5
 1   3
 3   9
-3   3"""
+3   3
+"""
 
 
 def test_sample_part1():
