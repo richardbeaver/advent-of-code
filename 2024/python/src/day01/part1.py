@@ -1,12 +1,12 @@
 import parsing
 
 
+# Tally a 'total distance':
+#   - The sum of all distances between each pair of numbers in the two lists,
+#     after having been sorted
+
+
 def solve(problem_input: str) -> int:
-    """
-    Tally a 'total distance':
-    - The sum of all distances between each pair of numbers in the two lists,
-      after having been sorted
-    """
     input_values = parsing.group_as_ints(problem_input)
     left, right = (list(col) for col in zip(*input_values))
 

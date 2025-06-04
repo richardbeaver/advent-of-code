@@ -2,13 +2,12 @@ from collections import defaultdict
 import parsing
 
 
-def solve(problem_input: str) -> int:
-    """
-    Tally a `similarity score`, which is the sum of:
-    - Every number in the left side list multipled by how many times it appears
-      in the right side list
-    """
+# Tally a `similarity score`, which is the sum of:
+#   - Every number in the left side list multipled by how many times it appears
+#     in the right side list
 
+
+def solve(problem_input: str) -> int:
     input_values = parsing.group_as_ints(problem_input)
     left, right = (list(col) for col in zip(*input_values))
 

@@ -2,6 +2,14 @@ import itertools
 import parsing
 
 
+# For each group (row) in the input, it is safe if all differences between
+# consecutive values:
+#   - are in the same direction (all positive or all negative)
+#   - have an absolute value in the range [1, 3]
+
+# Return total number of safe groups
+
+
 def solve(problem_input: str) -> int:
     input_values = parsing.group_as_ints(problem_input)
 
