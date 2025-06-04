@@ -1,6 +1,6 @@
 from pathlib import Path
 from testing_utils import get_day_from_filename, run_part_test
-from src import utils
+import utils
 
 DAY = get_day_from_filename(Path(__file__).name)
 FULL_INPUT = utils.read_data_input(DAY)

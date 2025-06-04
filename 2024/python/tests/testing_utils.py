@@ -1,6 +1,6 @@
 import re
 from typing import Any
-from src import utils
+import utils
 
 
 def get_day_from_filename(filename: str) -> int:
