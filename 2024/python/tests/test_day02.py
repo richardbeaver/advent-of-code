@@ -1,10 +1,12 @@
 from pathlib import Path
-import testing_utils
+from testing_utils import get_day_from_filename, run_part_test
+from src import utils
 
-DAY = testing_utils.get_day_from_filename(Path(__file__).name)
+DAY = get_day_from_filename(Path(__file__).name)
+FULL_INPUT = utils.read_data_input(DAY)
 
 
-TEST_INPUT = """
+SAMPLE_INPUT = """
 7 6 4 2 1
 1 2 7 8 9
 9 7 6 2 1
@@ -18,20 +20,20 @@ TEST_INPUT = """
 
 
 def test_sample_part1():
-    testing_utils.run_part_test(DAY, part=1, input_text=TEST_INPUT, expected=2)
+    run_part_test(DAY, part=1, input_text=SAMPLE_INPUT, expected=2)
 
 
 def test_sample_part2():
-    testing_utils.run_part_test(DAY, part=2, input_text=TEST_INPUT, expected=4)
-    testing_utils.run_part_test(DAY, part=2, input_text="4 6 4 2 1", expected=1)
+    run_part_test(DAY, part=2, input_text=SAMPLE_INPUT, expected=4)
+    run_part_test(DAY, part=2, input_text="4 6 4 2 1", expected=1)
 
 
 # =============
 
 
 def test_full_input_part1():
-    testing_utils.run_full_input_test(DAY, part=1, expected=680)
+    run_part_test(DAY, part=1, input_text=FULL_INPUT, expected=680)
 
 
 def test_full_input_part2():
-    testing_utils.run_full_input_test(DAY, part=2, expected=710)
+    run_part_test(DAY, part=2, input_text=FULL_INPUT, expected=710)

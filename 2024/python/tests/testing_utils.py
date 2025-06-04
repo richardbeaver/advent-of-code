@@ -16,12 +16,3 @@ def run_part_test(day: int, part: int, input_text: str, expected: Any):
     assert (
         result == expected
     ), f"Day {day}, Part {part} failed: expected {expected}, got {result}"
-
-
-def run_full_input_test(day: int, part: int, expected: Any):
-    input_text = utils.read_data_input(day)
-    module = utils.import_part_module(day, part)
-    result = module.solve(input_text)
-    assert (
-        result == expected
-    ), f"Day {day}, Part {part} Full Input: expected {expected}, got {result}"
