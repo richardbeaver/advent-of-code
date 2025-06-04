@@ -1,12 +1,6 @@
 import re
-from types import ModuleType
 from typing import Any
 from src import utils
-
-
-def run_solver_test(part_module: ModuleType, input_text: str, expected: Any):
-    result = part_module.solve(input_text)
-    assert result == expected, f"Expected {expected}, got {result}"
 
 
 def get_day_from_filename(filename: str) -> int:
