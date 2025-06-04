@@ -17,5 +17,4 @@ def test_as_lines():
 
 def test_group_as_ints():
     grouped = group_as_ints(TEST_INPUT)
-    as_lists = list(list(row) for row in grouped)
-    assert as_lists == [[3, 4], [4, 3], [2, 5], [1, 3], [3, 9], [3, 3]]
+    assert grouped == [[3, 4], [4, 3], [2, 5], [1, 3], [3, 9], [3, 3]]
