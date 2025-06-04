@@ -1,6 +1,14 @@
-target
+#IDEs
 .idea
+.vs_code
 
+# Rust
+target
+
+# Python
 .venv
 __pycache__
 .pytest_cache
+
+# Javascript
+node_modules
