@@ -1,3 +1,4 @@
+import itertools
 import parsing
 
 
@@ -13,51 +14,30 @@ import parsing
 
 def solve(problem_input: str) -> int:
     input_values = parsing.group_as_ints(problem_input)
-
-    return sum(1 for group in input_values if group_is_safe(list(group)))
-
-
-# TODO: reformulate this -> checking both directions in case first value is the
-# one that can be removed. This can probably be done differently without having
-# to go through entire group twice
-def group_is_safe(group: list[int]) -> bool:
-    return group_is_safe_directionally(group) or group_is_safe_directionally(
-        group[::-1]
+    return sum(
+        1 for group in input_values if safe_as_is(group) or safe_except_one(group)
     )
 
 
-def group_is_safe_directionally(group: list[int]) -> bool:
-    """
-    Group is safe in this order if at most 1 value can be removed from group
-    and all diffs be within [-3, -1] or [1, 3]
-    """
+def safe_as_is(group: list[int]) -> bool:
+    """Check if group satisfies the safe conditions with all given values"""
+    diffs = [b - a for a, b in itertools.pairwise(group)]
 
-    num_removed = 0
+    if all(diff > 0 for diff in diffs):
+        increasing = True
+    elif all(diff < 0 for diff in diffs):
+        increasing = False
+    else:
+        return False
 
-    if group[1] - group[0] == 0:
-        group = group[1:]
-        num_removed += 1
-
-    is_increasing = (group[1] - group[0]) > 0
-
-    i = 0
-    while i < len(group) - 1:
-        diff = group[i + 1] - group[i]
-
-        if diff_ok(diff, is_increasing):
-            pass
-        else:
-            if num_removed > 0:
-                return False
-
-            group = group[::]
-            group[i + 1] = group[i]
-            num_removed += 1
-
-        i += 1
-
-    return True
+    if increasing:
+        return all(diff in (1, 2, 3) for diff in diffs)
+    return all(diff in (-3, -2, -1) for diff in diffs)
 
 
-def diff_ok(diff: int, is_increasing: bool) -> bool:
-    return ((diff > 0) == is_increasing) and 1 <= abs(diff) <= 3
+def safe_except_one(group: list[int]) -> bool:
+    """Check if excluding any values causes the group to satisfy the safe conditions"""
+    for i in range(len(group)):
+        if safe_as_is(group[:i] + group[i + 1 :]):
+            return True
+    return False
