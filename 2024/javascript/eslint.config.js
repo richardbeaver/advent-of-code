@@ -1,25 +1,39 @@
+const js = require("@eslint/js");
+const jsdoc = require("eslint-plugin-jsdoc");
+const jest = require("eslint-plugin-jest");
+const globals = require("globals");
+
 module.exports = [
   js.configs.recommended,
   {
     files: ["**/*.js"],
     languageOptions: {
-      parser: require("@typescript-eslint/parser"),
-      parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "script",
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+        ...globals.jest,
       },
     },
     plugins: {
-      "@typescript-eslint": require("@typescript-eslint/eslint-plugin"),
-      jsdoc: require("eslint-plugin-jsdoc"),
+      jsdoc,
       jest,
     },
-    env: {
-      jest: true, // adds `test`, `expect`, etc. to globals
-      node: true,
-    },
-    extends: ["eslint:recommended", "plugin:jest/recommended"],
     rules: {
+      // JS
+      "no-var": "error",
+      "prefer-const": "error",
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+
+      // JSDoc
+      "jsdoc/require-jsdoc": "error",
+      "jsdoc/require-param": "error",
+      "jsdoc/require-returns": "error",
+      "jsdoc/check-types": "error",
+      "jsdoc/no-undefined-types": "error",
+      "jsdoc/require-param-type": "error",
+      "jsdoc/require-returns-type": "error",
+
       ...jest.configs.recommended.rules,
     },
   },

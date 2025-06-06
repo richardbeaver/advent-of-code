@@ -8,13 +8,13 @@ const parsing = require("../parsing");
  * @returns {number}
  */
 function solve(problemInput) {
-  let input_values = parsing.groupAsInts(problemInput);
-  let cols = input_values.map((_row, colIdx) =>
+  const input_values = parsing.groupAsInts(problemInput);
+  const cols = input_values.map((_row, colIdx) =>
     input_values.map((row) => row[colIdx])
   );
 
-  let left = cols[0];
-  let right = cols[1];
+  const left = cols[0];
+  const right = cols[1];
 
   left.sort((a, b) => a - b);
   right.sort((a, b) => a - b);

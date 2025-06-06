@@ -11,10 +11,10 @@ function asLines(data) {
 
 /**
  * @param {string} input_data
- * @return {number[][]}
+ * @returns {number[][]}
  */
 function groupAsInts(input_data) {
-  let lines = asLines(input_data);
+  const lines = asLines(input_data);
   return lines.map((line) => line.split(/\s+/).map((num) => Number(num)));
 }
 

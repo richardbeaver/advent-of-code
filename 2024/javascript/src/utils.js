@@ -7,7 +7,7 @@ const fs = require("fs");
  * @returns {string}
  */
 function readDataInput(day) {
-  let inputFilePath =
+  const inputFilePath =
     path.resolve(__dirname, "..", "..") +
     `/inputs/day${String(day).padStart(2, "0")}.txt`;
 
