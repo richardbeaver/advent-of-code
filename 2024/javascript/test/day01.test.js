@@ -1,10 +1,13 @@
 const part1 = require("../src/day01/part1");
 const part2 = require("../src/day01/part2");
 const utils = require("../src/utils");
+const testing_utils = require("./testing_utils");
+const path = require("path");
 
-const DAY = 1;
+const DAY = testing_utils.getDayFromFileName(path.basename(__filename));
+const FULL_INPUT = utils.readDataInput(DAY);
 
-const TEST_INPUT = `
+const SAMPLE_INPUT = `
 3   4
 4   3
 2   5
@@ -16,21 +19,19 @@ const TEST_INPUT = `
 // ========
 
 test("sample - part1", () => {
-  expect(part1.solve(TEST_INPUT)).toBe(11);
+  expect(part1.solve(SAMPLE_INPUT)).toBe(11);
 });
 
 test("sample - part2", () => {
-  expect(part2.solve(TEST_INPUT)).toBe(31);
+  expect(part2.solve(SAMPLE_INPUT)).toBe(31);
 });
 
 // ========
 
-let input_text = utils.readDataInput(DAY);
-
 test("full input - part1", () => {
-  expect(part1.solve(input_text)).toBe(1646452);
+  expect(part1.solve(FULL_INPUT)).toBe(1646452);
 });
 
 test("full input - part2", () => {
-  expect(part2.solve(input_text)).toBe(23609874);
+  expect(part2.solve(FULL_INPUT)).toBe(23609874);
 });
