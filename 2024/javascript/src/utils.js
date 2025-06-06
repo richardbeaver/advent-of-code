@@ -14,4 +14,15 @@ function readDataInput(day) {
   return fs.readFileSync(inputFilePath, "utf-8");
 }
 
-module.exports = { readDataInput };
+/**
+ * Import the `solve` function in the module for the given day and part
+ * @param {number} day
+ * @param {number} part
+ * @returns {(inputText: string) => number}
+ */
+function importPartSolveFunction(day, part) {
+  const filePath = `./day${String(day).padStart(2, "0")}/part${part}`;
+  return require(filePath).solve;
+}
+
+module.exports = { readDataInput, importPartSolveFunction };
