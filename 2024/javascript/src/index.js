@@ -1,6 +1,8 @@
 const utils = require("./utils");
 
 /**
+ * Get the day to run from the command line argument
+ * Usage: node src/index.js <day>
  * @returns {number}
  */
 function getDayFromArgs() {
@@ -19,6 +21,9 @@ function getDayFromArgs() {
   return day;
 }
 
+/**
+ * Main execution function to run solutions for a particular day
+ */
 function main() {
   const day = getDayFromArgs();
   const inputText = utils.readDataInput(day);

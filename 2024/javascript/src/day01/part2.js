@@ -8,17 +8,17 @@ const parsing = require("../parsing");
  * @returns {number}
  */
 function solve(problemInput) {
-  let input_values = parsing.groupAsInts(problemInput);
-  let cols = input_values.map((_, colIdx) =>
+  const input_values = parsing.groupAsInts(problemInput);
+  const cols = input_values.map((_, colIdx) =>
     input_values.map((row) => row[colIdx])
   );
 
-  let left = cols[0];
-  let right = cols[1];
+  const left = cols[0];
+  const right = cols[1];
 
-  let rightSideCounts = new Map();
+  const rightSideCounts = new Map();
   for (const right_val of right) {
-    let curCount = rightSideCounts.get(right_val) || 0;
+    const curCount = rightSideCounts.get(right_val) || 0;
     rightSideCounts.set(right_val, curCount + 1);
   }
 

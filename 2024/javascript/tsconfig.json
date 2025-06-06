@@ -3,7 +3,8 @@
     "checkJs": true,
     "allowJs": true,
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "noImplicitAny": true
   },
   "include": ["src/**/*", "test"]
 }
