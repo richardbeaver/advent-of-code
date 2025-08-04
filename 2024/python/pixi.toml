@@ -1,0 +1,15 @@
+[workspace]
+channels = ["conda-forge"]
+name = "2024-python"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+test = { args = ["day"], cmd = "just test {{day}}" }
+test-all = "just test-all"
+run = { args = ["day"], cmd = "just run {{day}}" }
+run-all = "just run-all"
+
+[dependencies]
+pylint = ">=3.3.7,<4"
+pytest = ">=8.4.1,<9"

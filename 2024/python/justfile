@@ -7,7 +7,7 @@ test-all:
 
 [no-exit-message]
 run DAY:
-    python3 src/main.py {{DAY}}
+    PYTHONPATH=src python3 -m src.main {{DAY}}
 
 run-all:
     for file in `ls src | grep day`; do \
